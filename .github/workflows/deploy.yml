@@ -50,4 +50,4 @@ jobs:
             fi
             
             # Restart/Start application with PM2
-            pm2 restart notification-system || pm2 start src/server.js --name notification-system
+            npx pm2 restart notification-system || npx pm2 start src/server.js --name notification-system
