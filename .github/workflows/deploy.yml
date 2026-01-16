@@ -18,11 +18,14 @@ jobs:
           node-version: '20'
 
       - name: Deploy to VM via SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.1
         with:
           host: ${{ secrets.AZURE_VM_IP }}
           username: ${{ secrets.AZURE_SSH_USER }}
           key: ${{ secrets.AZURE_SSH_KEY }}
+          debug: true
+          # Some older Azure VMs/Versions of this action have issues with key parsing. 
+          # Upgrading and enabling debug helps identify the mismatch.
           script: |
             # Navigate to project directory (update this if your path is different)
             cd ~/notification || git clone https://github.com/${{ github.repository }} ~/notification && cd ~/notification
